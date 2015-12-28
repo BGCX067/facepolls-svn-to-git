@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <title></title>
+    <link href="{{ MEDIA_URL }}css/layout.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.4.2.min.js"></script>
+<!--
+  jCarousel library
+-->
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.jcarousel.min.js"></script>
+<!--
+  jCarousel skin stylesheet
+-->
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/skin.css">
+
+<script type="text/javascript">
+
+function mycarousel_initCallback(carousel)
+{
+    // Disable autoscrolling if the user clicks the prev or next button.
+    carousel.buttonNext.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    carousel.buttonPrev.bind('click', function() {
+        carousel.startAuto(0);
+    });
+
+    // Pause autoscrolling if the user moves with the cursor over the clip.
+    carousel.clip.hover(function() {
+        carousel.stopAuto();
+    }, function() {
+        carousel.startAuto();
+    });
+};
+
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({
+        auto: 2,
+        wrap: 'last',
+        initCallback: mycarousel_initCallback
+    });
+});
+
+</script>
+
+</head>
+<body>
+<div id="container">
+    <div id="principal">
+        <div id="logo">
+            <a href="{% url Polls.views.homepage %}">
+                <img src="{{ MEDIA_URL }}img/logo.png">
+            </a>
+        </div>
+        <div id="menu">
+            <div id="itensMenu">
+                <a href="{% url Polls.views.todosresultados %}">resultados</a>
+                <a href="{% url Polls.views.Minhaenquete %}">minha enquete</a>
+                <a href="#">publicas</a>
+                <a href="{% url Polls.views.TopPolls %}">top polls</a>
+                <a href="#">ajuda</a>
+            </div>
+            <div id="btnCriarEnquete">
+                <a href="{% url Polls.views.cadastrarenquete %}">
+                    <img src="{{ MEDIA_URL }}img/btn_criar_s1.jpg">
+                </a>
+            </div>
+        </div>
+        <link href="{{ STATIC_URL }}css/facebook.css" type="text/css" rel="stylesheet" media="all" />
+        {% include 'django_facebook/_facebook_js.html' %}
+        <form action="{% url facebook_connect %}?facebook_login=1" method="post">
+            <a href="javascript:void(0);" style="font-size: 20px;" onclick="F.connect(this.parentNode);">Register, login or connect with facebook</a>
+            <input type="hidden" value="{{ request.path }}" name="next" />
+        </form>
+        <div id="box1">
+            <div id="box1Interna">
+                <div id="topHeader">
+                    <img src="{{ MEDIA_URL }}img/ultimas.png">
+                </div>
+                <div id="jquery">
+                    
+<div id="wrap">
+
+  <div class=" jcarousel-skin-tango">
+  	<div class="jcarousel-container jcarousel-container-horizontal">
+        <div class="jcarousel-clip jcarousel-clip-horizontal">
+
+        	<ul id="mycarousel" class="jcarousel-list jcarousel-list-horizontal">
+                {% for enquete in ultimas_5_noticias %}
+    			<li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal" jcarouselindex="1">
+                    <a style="text-decoration: none;" href="{{ enquete.id }}"><h4 class="ask1">{{ enquete.pergunta }}</h4>
+                    {% for votacao in enquete.votacao_set.all %}
+                	<div class="versus"><img src="{{ MEDIA_URL }}img/versus.png"></div>
+                    <div id="box-question"><img src="{{ MEDIA_URL }}{{ votacao.foto }}"width="219" height="154"></div></a>
+                    {% endfor %}
+                </li>
+                {% endfor %}
+  			</ul>
+
+         </div>
+         <div class="jcarousel-prev jcarousel-prev-horizontal jcarousel-prev-disabled jcarousel-prev-disabled-horizontal" disabled="true"><img src="{{ MEDIA_URL }}img/prev.png">
+     </div>
+     <div class="jcarousel-next jcarousel-next-horizontal" disabled="false"><img src="{{ MEDIA_URL }}img/next.png">
+  	</div>
+  </div>
+</div>
+
+</div>
+                </div>
+            </div>
+            <div id="shadow1"></div>
+        </div>
+        <div id="box2">
+
+            <div id="topCuriosos">
+                <img src="{{ MEDIA_URL }}img/topCuriosos.png">
+            </div>
+            <div id="facebookAvatar">
+
+            </div>
+        </div>
+        <div id="shadow4"></div>
+        <div id="box3">
+            <div id="box3Interna">
+                <div id="topHeader3">
+                    <img src="{{ MEDIA_URL }}img/topPolls.png">
+                </div>
+                <div id="containerTopPolls">
+                    {% for top in top_polls %}
+                    <div id="primeiro">
+                        <div id="imdFirt">
+                            <p class="first">{{ forloop.counter }}°</p>
+                        </div>
+                        <div id="Q1">
+                            <a href="{{ top.id }}" class="questao">{{ top.pergunta }}</a>
+                        </div>
+                        <div id="imgs">
+                            {% for votacao in top.votacao_set.all %}
+                                <div id="vot1">
+                                    <div id="borda">
+                                        <img src="{{ MEDIA_URL }}{{ votacao.foto }}" alt="" width="70px" height="87px">
+                                    </div>
+                                    <div id="votos">
+                                        <p>{{ votacao.quantidadevotos }} voto{{ votacao.quantidadevotos|pluralize }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            	<div id="separa2"></div>
+                        </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            <div id="shadow3"></div>
+        </div>
+        <div id="footer">
+            <div id="internaFooter">Todos os diretos reservados a Wesley Coutinho e Nataliel Vasconcelos</div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

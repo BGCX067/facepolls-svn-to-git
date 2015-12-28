@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h1>{{ enquete.pergunta }}</h1>
+
+<ul>
+    {% for votacao in enquete.votacao_set.all %}
+        <li>{{ votacao.opcao }} -- {{ votacao.quantidadevotos }} voto{{ votacao.quantidadevotos|pluralize }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

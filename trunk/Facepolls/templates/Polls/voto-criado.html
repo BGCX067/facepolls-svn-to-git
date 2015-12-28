@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <title></title>
+    <link href="{{ MEDIA_URL }}css/layout.css" rel="stylesheet" type="text/css">
+	<link href="{{ MEDIA_URL }}css/fileuploader.css" rel="stylesheet" type="text/css">
+    <script src="{{ MEDIA_URL }}js/jquery-1.4.2.min.js" type="text/jsscript"></script>
+	
+</head>
+<body>
+<div id="container">
+    <div id="principal">
+        <div id="logo">
+            <a href="{% url Polls.views.homepage %}">
+                <img src="{{ MEDIA_URL }}img/logo.png">
+            </a>
+        </div>
+        <div id="menu">
+            <div id="itensMenu">
+                <a href="{% url Polls.views.todosresultados %}">resultados</a>
+                <a href="{% url Polls.views.Minhaenquete %}">minha enquete</a>
+                <a href="#">publicas</a>
+                <a href="{% url Polls.views.TopPolls %}">top polls</a>
+                <a href="#">ajuda</a>
+            </div>
+            <div id="btnCriarEnquete">
+                <a href="{% url Polls.views.cadastrarenquete %}">
+                    <img src="{{ MEDIA_URL }}img/btn_criar_s1.jpg">
+                </a>
+            </div>
+        </div>
+        <div id="box3">
+            <div id="box3Interna">
+                <div id="topHeader3">
+                </div>
+                <div id="containerTopPolls">
+                    <div class="erro">Voto publicado com sucesso!</div>
+               </div>
+            </div>
+            <div id="shadow3"></div>
+        </div>
+        <div id="footer">
+            <div id="internaFooter">Todos os diretos reservados a Wesley Coutinho e Nataliel Vasconcelos</div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

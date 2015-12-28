@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <title></title>
+    <link href="{{ MEDIA_URL }}css/layout.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" async src="{{ MEDIA_URL }}js/ga.js"></script>
+
+</head>
+<body>
+<div id="container">
+    <div id="principal">
+        <div id="logo">
+            <a href="{% url Polls.views.homepage %}">
+                <img src="{{ MEDIA_URL }}img/logo.png">
+            </a>
+        </div>
+        <div id="menu">
+            <div id="itensMenu">
+                <a href="{% url Polls.views.todosresultados %}">resultados</a>
+                <a href="{% url Polls.views.Minhaenquete %}">minha enquete</a>
+                <a href="#">publicas</a>
+                <a href="{% url Polls.views.TopPolls %}">top polls</a>
+                <a href="#">ajuda</a>
+            </div>
+            <div id="btnCriarEnquete">
+                <a href="{% url Polls.views.cadastrarenquete %}">
+                    <img src="{{ MEDIA_URL }}img/btn_criar_s1.jpg">
+                </a>
+            </div>
+        </div>
+        </div>
+        <div id="box3">
+            <div id="box3Interna">
+                <div id="topHeader3">
+                </div>
+                <div id="containerTopPolls">
+                    <p class="ask">Resultado</p>
+                    <p class="ask">{{ enquete.pergunta }}</p>
+                {% for votacao in enquete.votacao_set.all|slice:"0:1" %}
+                    <a id="opcao1">
+                        <div id="capslide_img_cont" class="ic_container" style="width: 250px; height: 310px; ">
+                            <img src="{{ MEDIA_URL }}{{ votacao.foto }}" alt="" width="240px" height="300px">
+                            <div class="overlay" style="background-color: black; display: none; "></div>
+                            <div class="ic_caption" style="color: white; background-color: black; bottom: 0px; width: 250px; display: none; ">
+                                <p class="ic_category">Opção</p>
+                                <h3>{{ votacao.opcao }}</h3>
+                                <input type="radio" name="opcao" id="{{ forloop.counter }}" value="{{ votacao.id }}" />
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                {% for votacao in enquete.votacao_set.all|slice:"1:2" %}
+                <a id="opcao2">
+                	<div id="capslide_img_cont2" class="ic_container" style="width: 250px; height: 310px; ">
+                        <img src="{{ MEDIA_URL }}{{ votacao.foto }}" alt="" width="240px" height="300px">
+                    	<div class="overlay" style="background-color: black; display: none; "></div>
+                        <div class="ic_caption" style="color: white; background-color: black; bottom: 0px; width: 250px; display: none; ">
+							<p class="ic_category">Opção</p>
+                        	<h3>{{ votacao.opcao }}</h3>
+                            <input type="radio" name="opcao" id="{{ forloop.counter }}" value="{{ votacao.id }}" />
+                        </div>
+                    </div>
+                </a>
+                    <li>{{ votacao.opcao }} -- {{ votacao.quantidadevotos }} voto{{ votacao.quantidadevotos|pluralize }}</li>
+                {% endfor %}
+
+                    <div class="versus3"><img src="{{ MEDIA_URL }}img/versus.png"></div>
+            </div>
+            <div id="shadow3"></div>
+        </div>
+        <div id="footer">
+            <div id="internaFooter">Todos os diretos reservados a Wesley Coutinho e Nataliel Vasconcelos</div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
